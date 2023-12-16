@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createAction } from '@reduxjs/toolkit';
-import { TodoActionTypes, Todo, TodoAction } from './types';
+import { TodoActionTypes, Todo, TodoAction, TodoToCreate } from './types';
 import api from "../../api/session";
 import { addTodo, setTodos } from '../reducers/todoReducers';
 
@@ -18,7 +18,7 @@ import { addTodo, setTodos } from '../reducers/todoReducers';
 
 // export const deleteTodo = createAction<number>(TodoActionTypes.DELETE_TODO);
 
-export const addNewTodo = createAsyncThunk<Todo, Todo>(
+export const addNewTodo = createAsyncThunk<Todo, TodoToCreate>(
   TodoActionTypes.ADD_TODO,
   async ({ title, description }, { dispatch, rejectWithValue }) => {
     try {
@@ -68,36 +68,8 @@ export const fetchTodos = createAsyncThunk<Todo[], void>(
       dispatch(setTodos(data))
       return data;
     } catch (error) {
+      debugger;
       return rejectWithValue(error instanceof Error ? ('Error fetching todos: ' + error.message) : undefined);
     }
   }
 );
-
-// export const fetchTodos = () => {
-//   // Simulating an API call or dispatching an async action
-//   // Replace this with actual API call to fetch todos
-//   const mockTodos: Todo[] = [
-//     { id: 1, title: 'Example Todo 1', description: 'Description 1' },
-//     { id: 2, title: 'Example Todo 2', description: 'Description 2' },
-//   ];
-
-//   return (dispatch: Dispatch<TodoAction>) => {
-//     dispatch({
-//       type: TodoActionTypes.FETCH_TODOS,
-//       payload: mockTodos,
-//     });
-//   };
-// };
-
-// Implement other action creators (fetchTodos, editTodo, deleteTodo)
-
-
-// export const addTodo = (todo: Todo) => {
-//   return (dispatch: Dispatch<TodoAction>) => {
-//     dispatch({
-//       type: TodoActionTypes.ADD_TODO,
-//       payload: todo,
-//     });
-//   };
-// };
-
