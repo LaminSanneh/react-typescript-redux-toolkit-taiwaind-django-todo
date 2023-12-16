@@ -1,7 +1,11 @@
 import { UnknownAction } from "redux";
 
 export interface Todo {
-  id?: number;
+  id: number;
+  title: string;
+  description: string;
+}
+export interface TodoToCreate {
   title: string;
   description: string;
 }
@@ -12,6 +16,11 @@ export interface User {
 }
 
 export interface LoggedInUser {
+  user: { username: string },
+  token: string
+}
+
+export interface LoggedOutUser {
   user: { username: string },
   token: string
 }
@@ -67,12 +76,13 @@ export interface FetchTodosFailureAction {
 export enum UserActionTypes {
   REGISTER_USER = 'REGISTER_USER',
   LOGIN_USER = 'LOGIN_USER',
+  LOGOUT_USER = 'LOGOUT_USER',
   SET_USER_TOKEN = 'SET_USER_TOKEN'
 }
 
 export interface RegisterUserAction {
-  type: UserActionTypes.REGISTER_USER;
-  payload: User;
+  type: UserActionTypes.REGISTER_USER,
+  payload: User
 }
 
 export interface LoginUserAction {
@@ -80,9 +90,14 @@ export interface LoginUserAction {
   payload: LoggedInUser;
 }
 
+export interface LogoutUserAction {
+  type: UserActionTypes.LOGOUT_USER,
+  payload: LoggedOutUser
+}
+
 export interface SetUserTokenAction {
-  type: UserActionTypes.SET_USER_TOKEN;
-  payload: string;
+  type: UserActionTypes.SET_USER_TOKEN,
+  payload: string
 }
 
 export type TodoAction = AddTodoAction
@@ -93,5 +108,4 @@ export type TodoAction = AddTodoAction
   | FetchTodosSuccessAction
   | FetchTodosFailureAction;
 
-export type UserAction = LoggedInUser
-// | SetUserTokenAction
+export type UserAction = LoggedInUser | LoggedOutUser
