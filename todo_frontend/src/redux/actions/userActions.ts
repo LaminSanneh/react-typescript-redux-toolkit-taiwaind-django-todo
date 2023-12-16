@@ -2,7 +2,7 @@ import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store'; // Import your RootState type
 import api from "../../api/session";
 import { UserActionTypes, User } from './types';
-import { setUser, updateUserToken } from '../reducers/userReducers';
+import { clearUser, setUser, updateUserToken } from '../reducers/userReducers';
 import store from '../store';
 
 // Mock API endpoint for user registration
@@ -41,6 +41,18 @@ export const loginUser = createAsyncThunk<string, { username: string; password: 
       return token;
     } catch (error) {
       throw new Error('Failed to login');
+    }
+  }
+);
+
+export const logoutUser = createAsyncThunk(
+  UserActionTypes.LOGOUT_USER,
+  async (_, { dispatch }) => {
+    try {
+      debugger;
+      dispatch(clearUser());
+    } catch (error) {
+      throw new Error('Failed to logout');
     }
   }
 );

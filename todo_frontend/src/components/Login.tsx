@@ -20,19 +20,34 @@ const LoginForm: React.FC = () => {
 
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(loginUser(credentials));
+        debugger
+        dispatch(loginUser(credentials)).then(() => {
+            debugger
+            navigate('/');
+        });
     };
 
-    useEffect(() => {
-        debugger;
-        console.log('hey ya 1', loggedInUser, loggedInUser.token)
-        if (loggedInUser.token) {
-            dispatch(setUserToken(loggedInUser.token));
-            navigate('/');
-        }
-        // debugger
-    }, [loggedInUser.token]);
+    // useEffect(() => {
+    //     debugger;
+    //     console.log('hey ya 1', loggedInUser, loggedInUser.token)
+    //     if (loggedInUser.token) {
+    //         dispatch(setUserToken(loggedInUser.token));
+    //         navigate('/');
+    //     }
+    //     // debugger
+    // }, [loggedInUser.token]);
 
+    // useEffect(() => {
+    //     debugger;
+    //     console.log('hey ya 1', loggedInUser, loggedInUser.token)
+    //     if (loggedInUser.token) {
+    //         dispatch(setUserToken(loggedInUser.token));
+    //         navigate('/');
+    //     }
+    //     // debugger
+    // }, [loggedInUser.token]);
+
+    debugger
     return (
         <div>
             <h2>Login</h2>
