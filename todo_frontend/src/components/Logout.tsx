@@ -8,7 +8,7 @@ const Logout = function Logout() {
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
-    useEffect(() => {=
+    useEffect(() => {
         dispatch(logoutUser()).then(() => {
             navigate('/login');
         });
