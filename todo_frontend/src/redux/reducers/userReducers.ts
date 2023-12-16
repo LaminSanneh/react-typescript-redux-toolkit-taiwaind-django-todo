@@ -22,9 +22,9 @@ const userSlice = createSlice({
     setUser: (state = initialState, action: PayloadAction<UserAction>): UserState => {
       const token = action.payload.token;
       if (token) {
-        debugger
+        // debugger
         localStorage.setItem(TOKEN_STORAGE_KEY, token);
-        debugger
+        // debugger
         api.defaults.headers.Authorization = `Token ${token}`;
       } else {
         localStorage.removeItem(TOKEN_STORAGE_KEY);
@@ -36,7 +36,7 @@ const userSlice = createSlice({
       }
     },
     updateUserToken: (state, action: PayloadAction<string>): void => {
-      debugger
+      // debugger
       // const token = localStorage.get(TOKEN_STORAGE_KEY);
       const token = action.payload;
       console.log('log', token);
@@ -48,10 +48,9 @@ const userSlice = createSlice({
       // }
     },
     clearUser: (state = initialState) => {
-      return {
-        ...state,
-        user: null
-      };
+      // debugger;
+      api.defaults.headers.Authorization = null;
+      localStorage.removeItem(TOKEN_STORAGE_KEY);
     },
   },
 });
