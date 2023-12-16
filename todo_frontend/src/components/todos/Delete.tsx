@@ -15,10 +15,15 @@ const TodoItem: React.FC<TodoProps> = ({ todoId }) => {
   };
 
   return (
-    <div>
-      <span>{todoId}</span>
-      <button onClick={handleDeleteTodo}>Delete</button>
-    </div>
+    <>
+      <button className="todo-button" onClick={handleDeleteTodo}>
+        Delete
+      </button>
+    </>
+    // <div>
+    //   <span>{todoId}</span>
+    //   <button onClick={handleDeleteTodo}>Delete</button>
+    // </div>
   );
 };
 

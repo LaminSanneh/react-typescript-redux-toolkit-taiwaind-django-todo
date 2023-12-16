@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addNewTodo } from '../../redux/actions/todoActions';
-import { Todo } from '../../redux/actions/types';
+import { Todo, TodoToCreate } from '../../redux/actions/types';
 import { AppDispatch } from '../../redux/store';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ const CreateTodoForm: React.FC = () => {
   const navigate = useNavigate();
 
   const handleAddTodo = () => {
-    const newTodo: Todo = { title, description };
+    const newTodo: TodoToCreate = { title, description };
     dispatch(addNewTodo(newTodo)).then(() => {
       navigate('/');
     });
