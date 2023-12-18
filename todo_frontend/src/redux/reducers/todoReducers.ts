@@ -29,7 +29,6 @@ export const todoSlice = createSlice({
         return todo.id === todoUpdateValues.id;
       });
 
-      debugger;
       state.todos[todoToUpdateIndex] = { ...todoUpdateValues, ...state.todos[todoToUpdateIndex] }
     }
   }

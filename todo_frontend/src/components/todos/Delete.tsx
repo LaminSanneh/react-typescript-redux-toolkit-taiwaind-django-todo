@@ -4,14 +4,18 @@ import { deleteTodo } from '../../redux/actions/todoActions';
 import { AppDispatch } from '../../redux/store';
 
 interface TodoProps {
-  todoId: number;
+  todoId: number,
+  afterDeleteCallback: () => void
 }
 
-const TodoItem: React.FC<TodoProps> = ({ todoId }) => {
+const TodoItem: React.FC<TodoProps> = ({ todoId, afterDeleteCallback }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleDeleteTodo = () => {
-    dispatch(deleteTodo(todoId));
+    dispatch(deleteTodo(todoId)).then((e) => {
+      afterDeleteCallback();
+      console.log('deleted');
+    });
   };
 
   return (

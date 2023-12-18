@@ -12,7 +12,7 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-.todo-form {
+.todo-form, .add-todo-button-container {
   padding: 20px;
 }
 .todo-input {
@@ -57,4 +57,7 @@
 }
 .todo-button:hover {
   background-color: #555;
+}
+.no-todos-found-message {
+  text-align: center;
 }

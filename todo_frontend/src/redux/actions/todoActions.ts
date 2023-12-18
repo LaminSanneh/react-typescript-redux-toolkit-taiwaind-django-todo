@@ -36,7 +36,7 @@ export const deleteTodo = createAsyncThunk<void, number>(
   TodoActionTypes.DELETE_TODO,
   async (id, { rejectWithValue }) => {
     try {
-      await api.delete(`api/todo/{id}/delete/`);
+      await api.delete(`api/todo/${id}/delete/`);
     } catch (error) {
       return rejectWithValue(error instanceof Error ? ('Error deleting todo: ' + error.message) : undefined);
     }
@@ -49,7 +49,6 @@ export const fetchTodo = createAsyncThunk<Todo, number>(
     try {
       const response = await api.get(`/api/todo/fetch-todo/${id}`);
       const data: Todo = await response.data;
-      // dispatch(hydratefetchedTodo(data));
       return data;
     } catch (error) {
       return rejectWithValue(error instanceof Error ? ('Error fetching todo: ' + error.message) : undefined);
