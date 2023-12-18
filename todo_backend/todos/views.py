@@ -33,6 +33,16 @@ class TodoListView(APIView):
         serializer = TodoSerializer(todos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+class TodoDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        user = request.user
+        request.data['user'] = user.id
+        todo = Todo.objects.get(pk=pk, user=user)
+        serializer = TodoSerializer(todo, many=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 class TodoUpdateView(APIView):
     permission_classes = [IsAuthenticated]
 
