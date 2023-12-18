@@ -3,20 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createAction } from '@reduxjs/toolkit';
 import { TodoActionTypes, Todo, TodoAction, TodoToCreate } from './types';
 import api from "../../api/session";
-import { addTodo, setTodos } from '../reducers/todoReducers';
-
-// export const addTodo = (todo: Todo): TodoAction => {
-//   return {
-//     type: TodoActionTypes.ADD_TODO,
-//     payload: todo,
-//   };
-// };
-
-// export const addTodo = createAction<Todo>(TodoActionTypes.ADD_TODO);
-
-// export const editTodo = createAction<{ id: number; todo: Todo }>(TodoActionTypes.EDIT_TODO);
-
-// export const deleteTodo = createAction<number>(TodoActionTypes.DELETE_TODO);
+import { addTodo, hydratefetchedTodo, setTodos } from '../reducers/todoReducers';
 
 export const addNewTodo = createAsyncThunk<Todo, TodoToCreate>(
   TodoActionTypes.ADD_TODO,
@@ -36,7 +23,7 @@ export const editTodo = createAsyncThunk<Todo, Todo>(
   TodoActionTypes.EDIT_TODO,
   async (todo: Todo, { rejectWithValue }) => {
     try {
-      const response = await api.put(`/api/todo/{todo.id}/update/`, todo);
+      const response = await api.put(`/api/todo/${todo.id}/update/`, todo);
       const data: Todo = await response.data;
       return data;
     } catch (error) {
@@ -56,7 +43,19 @@ export const deleteTodo = createAsyncThunk<void, number>(
   }
 );
 
-// export const fetchTodos = createAction(TodoActionTypes.FETCH_TODOS);
+export const fetchTodo = createAsyncThunk<Todo, number>(
+  TodoActionTypes.FETCH_TODO,
+  async (id, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await api.get(`/api/todo/fetch-todo/${id}`);
+      const data: Todo = await response.data;
+      // dispatch(hydratefetchedTodo(data));
+      return data;
+    } catch (error) {
+      return rejectWithValue(error instanceof Error ? ('Error fetching todo: ' + error.message) : undefined);
+    }
+  }
+);
 
 export const fetchTodos = createAsyncThunk<Todo[], void>(
   TodoActionTypes.FETCH_TODOS,

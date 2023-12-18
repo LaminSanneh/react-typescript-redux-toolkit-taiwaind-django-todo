@@ -31,6 +31,7 @@ const FETCH_TODOS_FAILURE = 'FETCH_TODOS_FAILURE';
 
 export enum TodoActionTypes {
   ADD_TODO = 'ADD_TODO',
+  FETCH_TODO = 'FETCH_TODO',
   FETCH_TODOS = 'FETCH_TODOS',
   EDIT_TODO = 'EDIT_TODO',
   DELETE_TODO = 'DELETE_TODO',
@@ -47,6 +48,10 @@ export interface AddTodoAction {
 export interface FetchTodosAction {
   type: TodoActionTypes.FETCH_TODOS;
   payload: Todo[];
+}
+export interface FetchTodoAction {
+  type: TodoActionTypes.FETCH_TODO;
+  payload: Todo;
 }
 
 export interface EditTodoAction {
@@ -102,6 +107,7 @@ export interface SetUserTokenAction {
 
 export type TodoAction = AddTodoAction
   | FetchTodosAction
+  | FetchTodoAction
   | EditTodoAction
   | DeleteTodoAction
   | FetchTodosStartAction
